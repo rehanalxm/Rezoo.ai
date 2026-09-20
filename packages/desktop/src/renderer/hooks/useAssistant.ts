@@ -126,9 +126,24 @@ export function useAssistant() {
     }
   }, []);
 
-  // Dynamically resolve WebSocket host so mobile phone connects to computer's IP
-  const host = typeof window !== 'undefined' && window.location.hostname ? window.location.hostname : 'localhost';
-  const wsUrl = `ws://${host}:3001`;
+  // Dynamically resolve WebSocket URL (supports localhost, IP, and HTTPS/WSS in cloud)
+  const getWsUrl = () => {
+    if (typeof window === 'undefined') return 'ws://localhost:3001';
+    const isHttps = window.location.protocol === 'https:';
+    const protocol = isHttps ? 'wss:' : 'ws:';
+    const hostname = window.location.hostname || 'localhost';
+
+    // Cloud hosting (Render/Vercel/etc. on standard port 80/443)
+    if (hostname !== 'localhost' && hostname !== '127.0.0.1' && !hostname.startsWith('192.168.') && !hostname.startsWith('10.')) {
+      return `${protocol}//${window.location.host}`;
+    }
+
+    // Local development
+    const port = window.location.port === '5173' ? '3001' : (window.location.port || '3001');
+    return `${protocol}//${hostname}:${port}`;
+  };
+
+  const wsUrl = getWsUrl();
 
   const { isConnected, send } = useWebSocket(wsUrl, handleMessage);
 
