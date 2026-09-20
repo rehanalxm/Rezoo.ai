@@ -6,6 +6,11 @@ export default defineConfig({
   plugins: [react()],
   root: 'src/renderer',
   base: './',
+  resolve: {
+    alias: {
+      '@rezoo/shared': path.resolve(__dirname, '../shared/src'),
+    },
+  },
   build: {
     outDir: path.resolve(__dirname, 'dist/renderer'),
     emptyOutDir: true,

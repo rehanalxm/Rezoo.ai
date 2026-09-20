@@ -13,6 +13,10 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@rezoo/shared": ["packages/shared/dist/index.d.ts"]
+    },
     "outDir": "./dist",
     "rootDir": "./src"
   },
