@@ -9,34 +9,39 @@ export function useWebSocket(url: string, onMessage: (data: any) => void) {
     let delay = 1000;
 
     const connect = () => {
-      const ws = new WebSocket(url);
-      
-      ws.onopen = () => {
-        setIsConnected(true);
-        delay = 1000; // Reset delay
-      };
+      try {
+        const ws = new WebSocket(url);
 
-      ws.onmessage = (event) => {
-        try {
-          const data = JSON.parse(event.data);
-          onMessage(data);
-        } catch (e) {
-          console.error('Failed to parse WS message', e);
-        }
-      };
+        ws.onopen = () => {
+          setIsConnected(true);
+          delay = 1000; // Reset delay
+        };
 
-      ws.onclose = () => {
-        setIsConnected(false);
+        ws.onmessage = (event) => {
+          try {
+            const data = JSON.parse(event.data);
+            onMessage(data);
+          } catch (e) {
+            console.error('Failed to parse WS message', e);
+          }
+        };
+
+        ws.onclose = () => {
+          setIsConnected(false);
+          reconnectTimeout = setTimeout(connect, delay);
+          delay = Math.min(delay * 2, 30000); // Exponential backoff max 30s
+        };
+
+        ws.onerror = (error) => {
+          console.warn('WebSocket connection note:', error);
+          try { ws.close(); } catch {}
+        };
+
+        wsRef.current = ws;
+      } catch (err) {
+        console.warn('Could not establish WebSocket connection immediately:', err);
         reconnectTimeout = setTimeout(connect, delay);
-        delay = Math.min(delay * 2, 30000); // Exponential backoff max 30s
-      };
-
-      ws.onerror = (error) => {
-        console.error('WebSocket error', error);
-        ws.close();
-      };
-
-      wsRef.current = ws;
+      }
     };
 
     connect();
