@@ -4,7 +4,8 @@
   "main": "dist/main/index.js",
   "scripts": {
     "dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
-    "build": "vite build && tsc -p tsconfig.main.json",
+    "build": "vite build",
+    "build:electron": "tsc -p tsconfig.main.json",
     "pack": "electron-builder"
   },
   "dependencies": {

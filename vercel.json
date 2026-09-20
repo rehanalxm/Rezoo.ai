@@ -1,7 +1,7 @@
-﻿{
-  "": "https://openapi.vercel.sh/vercel.json",
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
-  "buildCommand": "pnpm --filter @rezoo/shared build && pnpm --filter @rezoo/desktop exec vite build",
+  "buildCommand": "pnpm build",
   "outputDirectory": "packages/desktop/dist/renderer",
   "rewrites": [
     {
