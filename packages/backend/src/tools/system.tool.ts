@@ -39,25 +39,15 @@ async function getDirectYouTubeVideoUrl(query: string): Promise<string> {
 
 export async function openUrlOrApp(target: string): Promise<string> {
   console.log(`🚀 Launching system target: "${target}"`);
-  if (target.startsWith('http://') || target.startsWith('https://')) {
-    // 100% reliable Windows browser launch via PowerShell Start-Process
+  if (process.platform === 'win32') {
     const psTarget = target.replace(/'/g, "''");
     exec(`powershell -Command "Start-Process '${psTarget}'"`, (err) => {
       if (err) {
         exec(`cmd.exe /c start "" "${target.replace(/&/g, '^&')}"`);
       }
     });
-    return target;
-  } else {
-    // Windows application launcher
-    const psTarget = target.replace(/'/g, "''");
-    exec(`powershell -Command "Start-Process '${psTarget}'"`, (err) => {
-      if (err) {
-        exec(`cmd.exe /c start "" "${target}"`);
-      }
-    });
-    return target;
   }
+  return target;
 }
 
 export async function registerSystemTools(registry: ToolRegistry) {
