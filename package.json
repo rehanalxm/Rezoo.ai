@@ -9,7 +9,8 @@
     "build:shared": "pnpm --filter @rezoo/shared build",
     "build:backend": "pnpm --filter @rezoo/backend build",
     "build:desktop": "pnpm --filter @rezoo/desktop build",
-    "build": "pnpm build:shared && pnpm build:backend && pnpm build:desktop",
+    "build": "pnpm build:shared && pnpm build:desktop",
+    "build:all": "pnpm build:shared && pnpm build:backend && pnpm build:desktop",
     "start": "concurrently --kill-others -n \"backend,desktop\" -c \"blue,magenta\" \"pnpm dev:backend\" \"pnpm dev:desktop\"",
     "clean": "pnpm -r exec -- rimraf dist node_modules"
   },

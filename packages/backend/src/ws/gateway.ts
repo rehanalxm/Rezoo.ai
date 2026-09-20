@@ -1,6 +1,6 @@
 import { WebSocketServer, WebSocket } from 'ws';
 import { v4 as uuidv4 } from 'uuid';
-import type { ClientMessage, ServerMessage } from '@rezoo/shared';
+import type { ClientMessage, ServerMessage } from '../shared/index.js';
 import { handleClientMessage } from './handlers.js';
 import { ToolRegistry } from '../tools/registry.js';
 import { AISession } from '../ai/session.js';

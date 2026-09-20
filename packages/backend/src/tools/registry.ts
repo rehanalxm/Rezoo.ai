@@ -1,4 +1,4 @@
-import type { RegisteredTool } from '@rezoo/shared';
+import type { RegisteredTool } from '../shared/index.js';
 import type OpenAI from 'openai';
 
 export class ToolRegistry {

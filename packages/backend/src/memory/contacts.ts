@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js';
-import type { Contact } from '@rezoo/shared';
+import type { Contact } from '../shared/index.js';
 import type { MemoryStore } from './store.js';
 
 export class ContactManager {

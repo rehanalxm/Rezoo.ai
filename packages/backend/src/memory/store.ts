@@ -1,6 +1,6 @@
 import { MongoClient, Collection, Db } from 'mongodb';
 import { envConfig } from '../config/env.js';
-import type { Contact, Memory } from '@rezoo/shared';
+import type { Contact, Memory } from '../shared/index.js';
 import fs from 'fs';
 import path from 'path';
 

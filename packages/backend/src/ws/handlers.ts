@@ -1,4 +1,4 @@
-import type { ClientMessage } from '@rezoo/shared';
+import type { ClientMessage } from '../shared/index.js';
 import type { ClientSession, WebSocketGateway } from './gateway.js';
 
 export async function handleClientMessage(

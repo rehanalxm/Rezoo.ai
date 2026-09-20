@@ -1,4 +1,4 @@
-import type { ConversationEntry } from '@rezoo/shared';
+import type { ConversationEntry } from '../shared/index.js';
 import type { MemoryStore } from './store.js';
 
 export class ConversationManager {
