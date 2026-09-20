@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.env
+*.ppn
+.DS_Store
+Thumbs.db
+*.log
+out/
+build/
+release/
+packages/desktop/release/
+.turbo/
+

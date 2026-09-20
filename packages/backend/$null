@@ -1,0 +1,7 @@
+Unable to find type [Audio].
+At line:1 char:1
++ [Audio]::Volume = 1
++ ~~~~~~~
+    + CategoryInfo          : InvalidOperation: (Audio:TypeName) [], RuntimeException
+    + FullyQualifiedErrorId : TypeNotFound
+ 

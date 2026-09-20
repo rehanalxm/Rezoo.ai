@@ -1,0 +1,24 @@
+{
+  "name": "rezoo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Rezoo — Cross-platform personal AI assistant (100% Free & Open Stack)",
+  "scripts": {
+    "dev:backend": "pnpm --filter @rezoo/backend dev",
+    "dev:desktop": "pnpm --filter @rezoo/desktop dev",
+    "build:shared": "pnpm --filter @rezoo/shared build",
+    "build:backend": "pnpm --filter @rezoo/backend build",
+    "build:desktop": "pnpm --filter @rezoo/desktop build",
+    "build": "pnpm build:shared && pnpm build:backend && pnpm build:desktop",
+    "start": "concurrently --kill-others -n \"backend,desktop\" -c \"blue,magenta\" \"pnpm dev:backend\" \"pnpm dev:desktop\"",
+    "clean": "pnpm -r exec -- rimraf dist node_modules"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "localtunnel": "^2.0.2"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}
